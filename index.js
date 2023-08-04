@@ -13,9 +13,7 @@ app.get('/', async (request, response) => {
 			.set('Content-Type', 'image/png')
 			.send(await getImage(request.query.zip, request.query.width || 640, request.query.height || 480));
 	} catch (error) {
-		response
-			.status(500)
-			.send(error.message);
+		console.log(error);
 	}
 });
 
