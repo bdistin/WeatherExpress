@@ -25,7 +25,7 @@ async function getImage(zip, width, height) {
 		headless: 'new'
 	});
 	const page = await browser.newPage();
-	page.setViewport({ width, height });
+	await page.setViewport({ width, height });
 	await page.goto(`https://weather.com/weather/tenday/l/${zip}`);
 	await page.waitForSelector('#WxuDailyCard-main-a43097e1-49d7-4df7-9d1a-334b29628263 > section');
 	const element = await page.$('#WxuDailyCard-main-a43097e1-49d7-4df7-9d1a-334b29628263 > section');
