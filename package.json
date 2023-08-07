@@ -10,6 +10,7 @@
   "license": "None",
   "dependencies": {
     "express": "^4.18.2",
+    "generic-pool": "^3.9.0",
     "puppeteer": "^21.0.1"
   },
   "devDependencies": {
