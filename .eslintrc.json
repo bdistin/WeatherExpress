@@ -1,3 +1,7 @@
 {
-	"extends": "klasa"
+	"extends": "klasa",
+	"parserOptions": {
+		"ecmaVersion": 2022
+	},
+	"sourcetype": "module"
 }

@@ -1,18 +1,20 @@
-const puppeteer = require('puppeteer');
-const genericPool = require('generic-pool');
+import puppeteer from 'puppeteer';
+import genericPool from 'generic-pool';
 
-class PuppeteerPool {
+const browser = await puppeteer.launch({
+    args: ['--no-sandbox'],
+    headless: 'new',
+    defaultViewport: null
+});
 
-	static create() {
-		return puppeteer.launch({
-			args: ['--no-sandbox'],
-			headless: 'new',
-			defaultViewport: null
-		});
+class PuppeteerPagePool {
+
+	static async create() {
+		return browser.newPage();
 	}
 
-	static destroy(browserInstance) {
-		return browserInstance.close();
+	static destroy(pageInstance) {
+		return pageInstance.close();
 	}
 
 	static validate() {
@@ -21,7 +23,7 @@ class PuppeteerPool {
 
 }
 
-module.exports = genericPool.createPool(PuppeteerPool, {
+export default genericPool.createPool(PuppeteerPagePool, {
 	min: 2,
 	max: 10,
 	testOnBorrow: true

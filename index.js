@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import pool from './pool.js';
+
 const app = express();
-const pool = require('./pool.js');
 
 app.get('/', async (request, response) => {
 	try {
@@ -23,13 +24,12 @@ app.get('/', async (request, response) => {
 });
 
 async function getImage(zip) {
-	const browser = await pool.acquire();
-	const page = await browser.newPage();
+	const page = await pool.acquire();
 	await page.goto(`https://weather.com/weather/tenday/l/${zip}`);
 	await page.waitForSelector('#WxuDailyCard-main-a43097e1-49d7-4df7-9d1a-334b29628263 > section');
 	const element = await page.$('#WxuDailyCard-main-a43097e1-49d7-4df7-9d1a-334b29628263 > section');
 	const image = await element.screenshot();
-	await pool.release(browser);
+	await pool.release(page);
 	return image;
 }
 
