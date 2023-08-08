@@ -1,20 +1,19 @@
 import puppeteer from 'puppeteer';
 import genericPool from 'generic-pool';
 
-const browser = await puppeteer.launch({
-    args: ['--no-sandbox'],
-    headless: 'new',
-    defaultViewport: null
-});
-
 class PuppeteerPagePool {
 
 	static async create() {
+		const browser = await puppeteer.launch({
+			args: ['--no-sandbox'],
+			headless: 'new',
+			defaultViewport: null
+		});
 		return browser.newPage();
 	}
 
 	static destroy(pageInstance) {
-		return pageInstance.close();
+		return pageInstance.browser.close();
 	}
 
 	static validate() {
