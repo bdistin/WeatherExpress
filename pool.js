@@ -12,12 +12,12 @@ class PuppeteerPagePool {
 		return browser.newPage();
 	}
 
-	static destroy(pageInstance) {
-		return pageInstance.browser.close();
+	static destroy(page) {
+		return page.browser.close();
 	}
 
-	static validate() {
-		return Promise.resolve(true);
+	static validate(page) {
+		return page.browser.isConnected() && !page.isClosed();
 	}
 
 }
