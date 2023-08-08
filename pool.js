@@ -13,11 +13,11 @@ class PuppeteerPagePool {
 	}
 
 	static destroy(page) {
-		return page.browser.close();
+		return page.browser().close();
 	}
 
 	static validate(page) {
-		return page.browser.isConnected() && !page.isClosed();
+		return page.browser().isConnected() && !page.isClosed();
 	}
 
 }
